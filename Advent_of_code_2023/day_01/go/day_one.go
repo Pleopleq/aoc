@@ -7,8 +7,6 @@ import (
 	"strconv"
 )
 
-var filePath = "D:\\Documentos\\adventofcode\\Advent_of_code_2023\\day_01\\go\\actual_file.txt"
-
 func main() {
 	var total int
 
