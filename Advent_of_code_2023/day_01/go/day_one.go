@@ -5,14 +5,12 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
-var filePath = "/home/pleopleq/Documents/Advent_of_code_2023/day_01/go/actual_file.txt"
+var filePath = "D:\\Documentos\\adventofcode\\Advent_of_code_2023\\day_01\\go\\test_file.txt"
 
 func main() {
-	var total int64
-	var unparsedNums [][]string
+	var total int
 
 	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
@@ -21,46 +19,24 @@ func main() {
 
 	for _, line := range bytes.Split(fileContent, []byte("\n")) {
 		lineLenght := len(line) - 1
-		var lineIndexFound int
-		var temp []string
+		var temp int
 
 		for i := 0; i < lineLenght; i++ {
 			if isStringNumber(line[i]) {
-				temp = append(temp, string(line[i]))
-				lineIndexFound = i + 1
+				temp = int(line[i]) * 10
+
 				break
 			}
 		}
 
-		if lineIndexFound == lineLenght-1 {
-			lineIndexFound = 0
-			break
-		}
-
-		for i := lineLenght; i > lineIndexFound; i-- {
+		for i := lineLenght; i >= 0; i-- {
 			if isStringNumber(line[i]) {
-				temp = append(temp, string(line[i]))
-				lineIndexFound = 0
+				temp += int(line[i])
 				break
 			}
 		}
 
-		unparsedNums = append(unparsedNums, temp)
-	}
-
-	for _, numStr := range unparsedNums {
-		if len(numStr) == 1 {
-			numStr = append(numStr, numStr[0])
-		}
-
-		joinedNumStr := strings.Join(numStr, "")
-		parsedNums, err := strconv.ParseInt(joinedNumStr, 10, 64)
-		fmt.Println(parsedNums)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		total = total + parsedNums
+		total += temp
 	}
 
 	fmt.Println(total)
