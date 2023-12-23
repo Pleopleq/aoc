@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-var filePath = "D:\\Documentos\\adventofcode\\Advent_of_code_2023\\day_01\\go\\test_file.txt"
+var filePath = "D:\\Documentos\\adventofcode\\Advent_of_code_2023\\day_01\\go\\actual_file.txt"
 
 func main() {
 	var total int
@@ -23,15 +23,23 @@ func main() {
 
 		for i := 0; i < lineLenght; i++ {
 			if isStringNumber(line[i]) {
-				temp = int(line[i]) * 10
+				integer, err := strconv.Atoi(string(line[i]))
+				if err != nil {
+					fmt.Println(err)
+				}
 
+				temp = integer * 10
 				break
 			}
 		}
 
 		for i := lineLenght; i >= 0; i-- {
 			if isStringNumber(line[i]) {
-				temp += int(line[i])
+				integer, err := strconv.Atoi(string(line[i]))
+				if err != nil {
+					fmt.Println(err)
+				}
+				temp += integer
 				break
 			}
 		}
